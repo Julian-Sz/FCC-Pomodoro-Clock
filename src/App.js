@@ -29,29 +29,34 @@ const reducer = (prev, action) => {
         ...prev,
         seconds: DEFAULT_SESSIONLENGTH,
       }));
+      let audioElement = document.getElementById("beep");
+      audioElement.pause();
+      audioElement.currentTime = 0;
+
       return {
         ...prev,
         paused: true,
+        break: false,
         breakLength: DEFAULT_BREAKLENGTH,
         sessionLength: DEFAULT_SESSIONLENGTH,
       };
     case ACTIONS.SESSION_INC:
-      if (!prev.paused) {
+      if (!prev.paused || prev.sessionLength >= 3600) {
         return prev;
       }
       return { ...prev, sessionLength: prev.sessionLength + 60 };
     case ACTIONS.SESSION_DEC:
-      if (!prev.paused) {
+      if (!prev.paused || prev.sessionLength < 60) {
         return prev;
       }
       return { ...prev, sessionLength: prev.sessionLength - 60 };
     case ACTIONS.BREAK_INC:
-      if (!prev.paused) {
+      if (!prev.paused || prev.breakLength >= 3600) {
         return prev;
       }
       return { ...prev, breakLength: prev.breakLength + 60 };
     case ACTIONS.BREAK_DEC:
-      if (!prev.paused) {
+      if (!prev.paused || prev.breakLength < 60) {
         return prev;
       }
       return { ...prev, breakLength: prev.breakLength - 60 };
@@ -95,6 +100,8 @@ function App() {
         setState((prev) => {
           if (prev.seconds < 1) {
             console.log("toggle action dispatched because seconds < 1");
+            let audioElement = document.getElementById("beep");
+            audioElement.play();
             dispatch({ type: ACTIONS.TOGGLE_BREAK });
           }
           return { ...prev, seconds: prev.seconds - 1 };
@@ -118,6 +125,9 @@ function App() {
         dispatch={dispatch}
         setcountdown={setState}
       />
+      <audio id="beep" src="alarm.wav" type="audio/wav" className="hidden">
+        Your browser does not support the audio element.
+      </audio>
     </div>
   );
 }
