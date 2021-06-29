@@ -155,7 +155,7 @@ function App() {
         animate={store.break ? { opacity: 1 } : { opacity: 0 }}
         transition={{ duration: 3 }}
       ></motion.div>
-      <div className="App mx-auto w-11/12 h-4/6 text-center flex flex-col justify-center   rounded-lg p-2 z-10">
+      <div className="App mx-auto w-11/12 h-4/6 text-center flex flex-col justify-center  rounded-lg p-2 z-10 max-w-4xl">
         <Countdown seconds={state.seconds} break={store.break} />
         <div className="flex justify-center mb-4">
           <SessionControls store={store} dispatch={dispatch} />
