@@ -20,7 +20,9 @@
     "build": "npm run watch:css && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "watch:css": "postcss src/styles/tailwind.css -o src/styles/output.css"
+    "watch:css": "postcss src/styles/tailwind.css -o src/styles/output.css",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -42,8 +44,10 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.2.6",
+    "gh-pages": "^3.2.3",
     "postcss": "^8.3.5",
     "postcss-cli": "^8.3.1",
     "tailwindcss": "^2.2.4"
-  }
+  },
+  "homepage": "http://julian-sz.github.io/FCC-Pomodoro-Clock"
 }
