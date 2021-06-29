@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef, useReducer } from "react";
+import { motion } from "framer-motion";
 import BreakControls from "./BreakControls";
 import SessionControls from "./SessionControls";
 import CountdownControls from "./CountdownControls";
 import Countdown from "./Countdown.js";
-import "tailwindcss/tailwind.css";
+import "./styles/output.css";
 import "./App.css";
 
 export const ACTIONS = {
@@ -18,6 +19,9 @@ export const ACTIONS = {
 
 const DEFAULT_SESSIONLENGTH = 1500;
 const DEFAULT_BREAKLENGTH = 300;
+
+// const DEFAULT_SESSIONLENGTH = 10;
+// const DEFAULT_BREAKLENGTH = 10;
 
 const reducer = (prev, action) => {
   console.log("action dispatched", action);
@@ -134,20 +138,38 @@ function App() {
   }, [store.break, state.seconds]);
 
   return (
-    <div className="App container mx-auto w-screen h-screen text-center flex flex-col justify-center">
-      <div className="flex justify-center">
-        <SessionControls store={store} dispatch={dispatch} />
-        <BreakControls store={store} dispatch={dispatch} />
+    <div className="App-container h-screen w-screen flex flex-col justify-center">
+      <motion.div
+        className="overlay1 absolute w-full h-full z-0 bg-gradient-to-tr
+        from-purple-500
+        via-blue-500
+        to-green-500"
+      ></motion.div>
+      <motion.div
+        className="overlay2 absolute w-full h-full z-0 bg-gradient-to-tr
+        from-yellow-500
+        via-purple-500
+        via-purple-500
+        to-blue-500
+        opacity-0"
+        animate={store.break ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: 3 }}
+      ></motion.div>
+      <div className="App mx-auto w-11/12 h-4/6 text-center flex flex-col justify-center   rounded-lg p-2 z-10">
+        <Countdown seconds={state.seconds} break={store.break} />
+        <div className="flex justify-center mb-4">
+          <SessionControls store={store} dispatch={dispatch} />
+          <BreakControls store={store} dispatch={dispatch} />
+        </div>
+        <CountdownControls
+          store={store}
+          dispatch={dispatch}
+          setcountdown={setState}
+        />
+        <audio id="beep" src="alarm.wav" type="audio/wav" className="hidden">
+          Your browser does not support the audio element.
+        </audio>
       </div>
-      <Countdown seconds={state.seconds} break={store.break} />
-      <CountdownControls
-        store={store}
-        dispatch={dispatch}
-        setcountdown={setState}
-      />
-      <audio id="beep" src="alarm.wav" type="audio/wav" className="hidden">
-        Your browser does not support the audio element.
-      </audio>
     </div>
   );
 }

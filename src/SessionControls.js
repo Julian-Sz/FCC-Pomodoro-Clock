@@ -4,30 +4,31 @@ import { ACTIONS } from "./App.js";
 export default function SessionControls(props) {
   let minutes = Math.floor(props.store.sessionLength / 60);
   return (
-    <div className="mx-5 flex-1 text-right">
-      <h2 id="session-label" className="">
+    <div className="mx-1 flex-1 grid grid-rows-2 grid-cols-3 text-center justify-items-center content-center align-middle">
+      <h2 id="session-label" className="col-span-3">
         Session Length
       </h2>
-      <div id="session-length" className="">
-        {minutes}
-      </div>
+
       <button
         onClick={() => {
           props.dispatch({ type: ACTIONS.SESSION_INC });
         }}
         id="session-increment"
-        className="border-4 bg-green-500 border-gray-300 rounded p-3 mx-3 hover:bg-green-300"
+        className="btn"
       >
-        +
+        <i className="bi bi-plus-lg"></i>
       </button>
+      <span id="session-length" className="text-xl">
+        {minutes}
+      </span>
       <button
         onClick={() => {
           props.dispatch({ type: ACTIONS.SESSION_DEC });
         }}
         id="session-decrement"
-        className="border-4 bg-green-500 border-gray-300 rounded p-3 mx-3 hover:bg-green-300"
+        className="btn"
       >
-        -
+        <i className="bi bi-dash-lg"></i>
       </button>
     </div>
   );

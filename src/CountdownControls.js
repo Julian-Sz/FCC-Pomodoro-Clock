@@ -3,10 +3,10 @@ import { ACTIONS } from "./App.js";
 
 export default function CountdownControls(props) {
   return (
-    <div className="text-white flex justify-center">
+    <div className="text-white flex justify-around">
       <button
         id="start_stop"
-        className="border-4 bg-green-500 border-gray-300 rounded p-3 mx-3 hover:bg-green-300"
+        className="btn w-4/12"
         onClick={() => {
           props.dispatch({
             type: ACTIONS.SET_PAUSED,
@@ -18,7 +18,7 @@ export default function CountdownControls(props) {
       </button>
       <button
         id="reset"
-        className="border-4 bg-green-500 border-gray-300 rounded p-3 mx-3 hover:bg-green-300"
+        className="btn w-4/12"
         onClick={() => {
           console.log("reset button pressed");
           props.dispatch({

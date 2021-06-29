@@ -10,10 +10,12 @@ export default function Countdown(props) {
     seconds = "0" + String(seconds);
   }
   return (
-    <div>
-      <h2 id="timer-label">{props.break ? "Break" : "Session"}</h2>
+    <div className="mb-12">
+      <h2 id="timer-label" className="text-3xl">
+        {props.break ? "Break" : "Session"}
+      </h2>
       <div id="timer-container">
-        <span id="time-left">
+        <span id="time-left" className="text-8xl">
           {minutes}:{seconds}
         </span>
       </div>

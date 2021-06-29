@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+
+.btn {
+  @apply bg-green-500 border-gray-400 border-2 rounded p-1;
+}
+.btn:hover {
+  @apply hover:bg-green-300;
+}
+
+/* .bi {
+  width: 10px;
+  height: 10px;
+} */
+
+@tailwind utilities;
