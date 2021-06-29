@@ -8,7 +8,10 @@ export default function CountdownControls(props) {
         id="start_stop"
         className="border-4 bg-green-500 border-gray-300 rounded p-3 mx-3 hover:bg-green-300"
         onClick={() => {
-          props.dispatch({ type: ACTIONS.PLAY_PAUSE });
+          props.dispatch({
+            type: ACTIONS.SET_PAUSED,
+            payload: !props.store.paused,
+          });
         }}
       >
         {props.store.paused ? "Play" : "Pause"}
@@ -17,6 +20,7 @@ export default function CountdownControls(props) {
         id="reset"
         className="border-4 bg-green-500 border-gray-300 rounded p-3 mx-3 hover:bg-green-300"
         onClick={() => {
+          console.log("reset button pressed");
           props.dispatch({
             type: ACTIONS.RESET,
             setcountdown: props.setcountdown,
